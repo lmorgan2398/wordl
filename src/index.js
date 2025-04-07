@@ -1,6 +1,7 @@
 import './styles.css'
 import { getRandomWord } from "./words";
 import { getGameboard, newGameboard, newTurn, resetTurn, writeLetter, deleteLetter, checkForCompleteWord } from "./array";
+import { updateGameDisplay } from './display';
 
 newGameboard();
 writeLetter('a');
@@ -17,3 +18,4 @@ console.log(getGameboard());
 newTurn();
 writeLetter('e');
 console.log(getGameboard());
+updateGameDisplay(getGameboard());
