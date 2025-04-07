@@ -30,9 +30,15 @@ document.addEventListener('keydown', (e) => {
                 toggleNewGameButton();
                 gameState = 'inactive';
                 return;
-            } else
+            } else if(getTurn() === 5){
+                displayAnswer(randomWord);
+                toggleNewGameButton();
+                gameState = 'inactive';
+                alert('Better luck next time!');
+            } else {
                 newTurn();
                 return;
+            };
         } else {
             alert('Invalid word!');
             return;
