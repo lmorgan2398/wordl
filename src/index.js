@@ -13,10 +13,9 @@ document.addEventListener('keydown', (e) => {
     if(e.key === 'Enter' && checkForCompleteWord() === true){
         let currentRow = getGameboard()[getTurn()];
         let currentRowWord = currentRow.join('');
-        let capitalCurrentRowWord = currentRowWord.charAt(0).toUpperCase() + currentRowWord.slice(1);
-        console.log(capitalCurrentRowWord);
-        console.log(getWordsArray().includes(capitalCurrentRowWord));
-        if(getWordsArray().includes(capitalCurrentRowWord)){
+        console.log(currentRowWord);
+        console.log(getWordsArray().includes(currentRowWord));
+        if(getWordsArray().includes(currentRowWord)){
             checkForMatch(getGameboard(), getTurn());
             newTurn();
             return;
@@ -37,17 +36,13 @@ document.addEventListener('keydown', (e) => {
 
 const checkForMatch = function(gameboard, turn){
     let currentRow = gameboard[turn];
-    let currentRowWord = currentRow.join('');
-    let capitalCurrentRowWord = currentRowWord.charAt(0).toUpperCase() + currentRowWord.slice(1);
-    if(getWordsArray().includes(capitalCurrentRowWord)){
-        for(let i = 0; i < currentRow.length; i++){
-            if(randomWordArray[i] === currentRow[i]){
-                addAnswerClass(turn, i, 'right');
-            } else if (randomWordArray.includes(currentRow[i])){
-                addAnswerClass(turn, i, 'close');
-            } else {
-                addAnswerClass(turn, i, 'wrong');
-            }
+    for(let i = 0; i < currentRow.length; i++){
+        if(randomWordArray[i] === currentRow[i]){
+            addAnswerClass(turn, i, 'right');
+        } else if (randomWordArray.includes(currentRow[i])){
+            addAnswerClass(turn, i, 'close');
+        } else {
+            addAnswerClass(turn, i, 'wrong');
         }
-    } else { alert('Invalid word!')};
+    }
 }
