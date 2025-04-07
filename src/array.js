@@ -39,13 +39,4 @@ const checkForCompleteWord = function(){
     }
 }
 
-// const checkForMatch = function(random){
-//     let currentRow = gameboard[currentTurn];
-//     for(let i = 0; i < currentRow.length; i++){
-//         if(random[i] === currentRow[i]){
-            
-//         }
-//     }
-// }
-
 export { getGameboard, newGameboard, getTurn, newTurn, resetTurn, writeLetter, deleteLetter, checkForCompleteWord }

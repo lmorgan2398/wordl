@@ -9,6 +9,7 @@ body,
 
 body {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -41,4 +42,16 @@ body {
 
 .wrong {
     background-color: gray;
+}
+
+.new-game {
+    margin-top: 30px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: 2px solid black;
+    background-color: rgb(182, 182, 182);
+}
+
+.new-game:hover {
+    background-color: lightgray;
 }

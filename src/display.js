@@ -6,8 +6,12 @@ const updateGameDisplay = function(gameboard){
         for(let j = 0; j < gameboardRow.length; j++){
             gameDisplay.forEach((cell) => {
                 if(cell.dataset.index === `[${i}][${j}]`){
-                    cell.textContent = gameboardRow[j];
-                    return;
+                    if(gameboardRow[j] !== null){
+                        cell.textContent = gameboardRow[j].toUpperCase();
+                        return;
+                    } else {
+                        cell.textContent = '';
+                    }
                 }
             });
         }
@@ -23,4 +27,12 @@ const addAnswerClass = function(row, column, status){
     })
 }
 
-export { updateGameDisplay, addAnswerClass }
+const clearAnswerClasses = function(){
+    gameDisplay.forEach((cell) => {
+        cell.classList.remove('right');
+        cell.classList.remove('close');
+        cell.classList.remove('wrong');
+    })
+}
+
+export { updateGameDisplay, addAnswerClass, clearAnswerClasses }

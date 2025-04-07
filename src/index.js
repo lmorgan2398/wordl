@@ -1,15 +1,18 @@
 import './styles.css'
 import { getRandomWord, getWordsArray } from "./words";
 import { getGameboard, newGameboard, newTurn, resetTurn, writeLetter, deleteLetter, checkForCompleteWord, getTurn } from "./array";
-import { updateGameDisplay, addAnswerClass } from './display';
+import { updateGameDisplay, addAnswerClass, clearAnswerClasses } from './display';
 
-newGameboard();
-let randomWord = getRandomWord();
-let randomWordArray = randomWord.split('');
-console.log(randomWordArray);
+let randomWord;
+let randomWordArray;
+let gameState;
+
+newGame();
 
 document.addEventListener('keydown', (e) => {
-    console.log(e.key)
+    if(gameState === 'inactive'){
+        return;
+    }
     if(e.key === 'Enter' && checkForCompleteWord() === true){
         let currentRow = getGameboard()[getTurn()];
         let currentRowWord = currentRow.join('');
@@ -20,6 +23,7 @@ document.addEventListener('keydown', (e) => {
             console.log(currentRowWord === randomWord);
             if(currentRowWord == randomWord){
                 alert('You win!');
+                gameState = 'inactive';
                 return;
             } else
                 newTurn();
@@ -39,7 +43,13 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-const checkForMatch = function(gameboard, turn){
+const newGameButton = document.querySelector('.new-game');
+newGameButton.addEventListener('click', () => {
+    newGame();
+    return;
+})
+
+function checkForMatch(gameboard, turn){
     let currentRow = gameboard[turn];
     for(let i = 0; i < currentRow.length; i++){
         if(randomWordArray[i] === currentRow[i]){
@@ -50,4 +60,14 @@ const checkForMatch = function(gameboard, turn){
             addAnswerClass(turn, i, 'wrong');
         }
     }
+}
+
+function newGame(){
+    resetTurn();
+    newGameboard();
+    clearAnswerClasses();
+    updateGameDisplay(getGameboard());
+    randomWord = getRandomWord();
+    randomWordArray = randomWord.split('');
+    gameState = 'active';
 }
