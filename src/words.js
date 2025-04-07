@@ -5,6 +5,8 @@ export function getRandomWord(){
     return randomWord;
 }
 
+
+export const getWordsArray = () => words;
 const words = [
     "Able", "Also", "Area", "Back", "Ball", "Band", "Bank", "Base", "Bath", "Bear",
     "Beat", "Been", "Belt", "Best", "Bill", "Bird", "Bite", "Blue", "Boat", "Body",
