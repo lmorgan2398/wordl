@@ -1,3 +1,6 @@
 import { getRandomWord } from "./words";
+import { getGameboard, newGameboard, writeLetter } from "./array";
 
-console.log(getRandomWord());
+writeLetter(0, 'a');
+writeLetter(0, 'c');
+console.log(getGameboard());
