@@ -13,12 +13,17 @@ document.addEventListener('keydown', (e) => {
     if(e.key === 'Enter' && checkForCompleteWord() === true){
         let currentRow = getGameboard()[getTurn()];
         let currentRowWord = currentRow.join('');
-        console.log(currentRowWord);
-        console.log(getWordsArray().includes(currentRowWord));
         if(getWordsArray().includes(currentRowWord)){
             checkForMatch(getGameboard(), getTurn());
-            newTurn();
-            return;
+            console.log(currentRowWord);
+            console.log(randomWord);
+            console.log(currentRowWord === randomWord);
+            if(currentRowWord == randomWord){
+                alert('You win!');
+                return;
+            } else
+                newTurn();
+                return;
         } else {
             alert('Invalid word!');
             return;
