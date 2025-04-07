@@ -55,4 +55,17 @@ const toggleNewGameButton = function(){
     }
 }
 
-export { updateGameDisplay, addAnswerClass, clearAnswerClasses, displayAnswer, clearAnswerDisplay, toggleNewGameButton }
+const shakeRow = function(turn){
+    for(let i = 0; i < 4; i++){
+        gameDisplay.forEach((cell) => {
+            if(cell.dataset.index === `[${turn}][${i}]`){
+                cell.classList.add('shake-horizontal');
+                setTimeout(() => {
+                    cell.classList.remove('shake-horizontal');
+                }, 1000)
+            }
+        })
+    }
+}
+
+export { updateGameDisplay, addAnswerClass, clearAnswerClasses, displayAnswer, clearAnswerDisplay, toggleNewGameButton, shakeRow }
