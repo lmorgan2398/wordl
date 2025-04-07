@@ -1,14 +1,13 @@
-function initializeGameboard(){
-    return new Array(6).fill(null).map(() => new Array(4).fill(null));
-}
-
-let gameboard = initializeGameboard();
-
+let gameboard;
 const getGameboard = () => gameboard;
+const newGameboard = () => gameboard = new Array(6).fill(null).map(() => new Array(4).fill(null));
 
-const newGameboard = () => gameboard = initializeGameboard();
+let currentTurn = 0;
+const newTurn = () => currentTurn++;
+const resetTurn = () => currentTurn = 0;
 
-const writeLetter = function(currentTurn, inputLetter){
+
+const writeLetter = function(inputLetter){
     let currentRow = gameboard[currentTurn];
     for(let i = 0; i < currentRow.length; i++){
         if(currentRow[i] === null){
@@ -18,4 +17,26 @@ const writeLetter = function(currentTurn, inputLetter){
     }
 }
 
-export { getGameboard, newGameboard, writeLetter }
+
+const deleteLetter = function(){
+    let currentRow = gameboard[currentTurn];
+    for(let i = currentRow.length - 1; i >= 0; i--){
+        if(currentRow[i] !== null){
+            currentRow[i] = null;
+            return;
+        }
+    }
+}
+
+
+const checkForCompleteWord = function(){
+    let currentRow = gameboard[currentTurn];
+    if(!currentRow.includes(null)){
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
+export { getGameboard, newGameboard, newTurn, resetTurn, writeLetter, deleteLetter, checkForCompleteWord }
