@@ -35,4 +35,24 @@ const clearAnswerClasses = function(){
     })
 }
 
-export { updateGameDisplay, addAnswerClass, clearAnswerClasses }
+const answerDisplay = document.querySelector('.answer-display');
+const displayAnswer = function(word){
+    answerDisplay.textContent = word.toUpperCase();
+    answerDisplay.style.visibility = 'visible';
+}
+const clearAnswerDisplay = function(){
+    answerDisplay.textContent = '';
+    answerDisplay.style.visibility = 'hidden';
+}
+
+const newGameButton = document.querySelector('.new-game');
+const toggleNewGameButton = function(){
+    console.log(newGameButton.style.visibility);
+    if(newGameButton.style.visibility === 'hidden'){
+        newGameButton.style.visibility = 'visible';
+    } else {
+        newGameButton.style.visibility = 'hidden';
+    }
+}
+
+export { updateGameDisplay, addAnswerClass, clearAnswerClasses, displayAnswer, clearAnswerDisplay, toggleNewGameButton }

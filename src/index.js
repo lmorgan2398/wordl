@@ -1,13 +1,17 @@
 import './styles.css'
 import { getRandomWord, getWordsArray } from "./words";
 import { getGameboard, newGameboard, newTurn, resetTurn, writeLetter, deleteLetter, checkForCompleteWord, getTurn } from "./array";
-import { updateGameDisplay, addAnswerClass, clearAnswerClasses } from './display';
+import { updateGameDisplay, addAnswerClass, clearAnswerClasses, displayAnswer, clearAnswerDisplay, toggleNewGameButton } from './display';
 
 let randomWord;
 let randomWordArray;
 let gameState;
 
-newGame();
+document.addEventListener('DOMContentLoaded', () => {
+    newGame();
+    return;
+})
+
 
 document.addEventListener('keydown', (e) => {
     if(gameState === 'inactive'){
@@ -22,7 +26,8 @@ document.addEventListener('keydown', (e) => {
             console.log(randomWord);
             console.log(currentRowWord === randomWord);
             if(currentRowWord == randomWord){
-                alert('You win!');
+                displayAnswer(randomWord);
+                toggleNewGameButton();
                 gameState = 'inactive';
                 return;
             } else
@@ -63,7 +68,9 @@ function checkForMatch(gameboard, turn){
 }
 
 function newGame(){
+    toggleNewGameButton();
     resetTurn();
+    clearAnswerDisplay();
     newGameboard();
     clearAnswerClasses();
     updateGameDisplay(getGameboard());
