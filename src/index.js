@@ -1,3 +1,4 @@
+import './styles.css'
 import { getRandomWord } from "./words";
 import { getGameboard, newGameboard, newTurn, resetTurn, writeLetter, deleteLetter, checkForCompleteWord } from "./array";
 
