@@ -47,7 +47,6 @@ const clearAnswerDisplay = function(){
 
 const newGameButton = document.querySelector('.new-game');
 const toggleNewGameButton = function(){
-    console.log(newGameButton.style.visibility);
     if(newGameButton.style.visibility === 'hidden'){
         newGameButton.style.visibility = 'visible';
     } else {

@@ -67,13 +67,27 @@ document.addEventListener('keydown', (e) => {
 
 function checkForMatch(gameboard, turn){
     let currentRow = gameboard[turn];
+    let randomWordCloseArray = [];
+    let currentRowCloseArray = [];
     for(let i = 0; i < currentRow.length; i++){
         if(randomWordArray[i] === currentRow[i]){
             addAnswerClass(turn, i, 'right');
-        } else if (randomWordArray.includes(currentRow[i])){
-            addAnswerClass(turn, i, 'close');
+            currentRowCloseArray.push(null);
         } else {
-            addAnswerClass(turn, i, 'wrong');
+            randomWordCloseArray.push(randomWordArray[i]);
+            currentRowCloseArray.push(currentRow[i]);
+        }
+    }
+    for(let i = 0; i < currentRowCloseArray.length; i++){
+        console.log(i);
+        if(currentRowCloseArray[i] !== null){
+            let closeValue = currentRowCloseArray[i];
+            if(randomWordCloseArray.includes(closeValue)){
+                addAnswerClass(turn, i, 'close');
+                randomWordCloseArray.splice(randomWordCloseArray.findIndex((element) => element === closeValue), 1);
+            } else {
+                addAnswerClass(turn, i, 'wrong');
+            }
         }
     }
 }
