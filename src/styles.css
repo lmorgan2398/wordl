@@ -18,18 +18,32 @@ body {
     background-color: rgb(27, 27, 27);
 }
 
+h1 {
+    font-size: 76px;
+    letter-spacing: 16px;
+    text-align: center;
+    position: relative;
+    right: -6px;
+    color: rgb(230, 230, 230);
+}
+
+.game-description {
+    color: rgb(230, 230, 230);
+    font-size: 18px;
+}
+
 .game-container {
     display: grid;
-    grid-template-rows: repeat(6, 100px);
-    grid-template-columns: repeat(4, 100px);
+    grid-template-rows: repeat(6, 80px);
+    grid-template-columns: repeat(4, 80px);
     gap: 10px;
 }
 
 .cell {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     border: 4px solid rgb(61, 61, 61);
-    font-size: 60px;
+    font-size: 45px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -51,7 +65,7 @@ body {
 }
 
 .new-game {
-    margin-top: 35px;
+    margin-top: 20px;
     font-size: 16px;
     color: rgb(230, 230, 230);
     font-weight: bold;
@@ -64,7 +78,7 @@ body {
     background-color: whitesmoke;
     color: rgb(27, 27, 27);
     border-radius: 8px;
-    margin-bottom: 30px;
+    margin: 20px 0px;
     visibility: hidden;
     height: 41px;
     font-size: 18px;
