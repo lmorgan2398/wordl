@@ -59,11 +59,6 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// const newGameButton = document.querySelector('.new-game');
-// newGameButton.addEventListener('click', () => {
-//     newGame();
-//     return;
-// })
 
 function checkForMatch(gameboard, turn){
     let currentRow = gameboard[turn];
@@ -79,7 +74,6 @@ function checkForMatch(gameboard, turn){
         }
     }
     for(let i = 0; i < currentRowCloseArray.length; i++){
-        console.log(i);
         if(currentRowCloseArray[i] !== null){
             let closeValue = currentRowCloseArray[i];
             if(randomWordCloseArray.includes(closeValue)){
@@ -91,6 +85,58 @@ function checkForMatch(gameboard, turn){
         }
     }
 }
+
+
+
+const keys = document.querySelectorAll('.keyboard-container button');
+
+keys.forEach(key => {
+    key.addEventListener('click', () => {
+        if(key.dataset.key === 'Enter'){
+            if(gameState === 'active' && checkForCompleteWord() === true){
+                let currentRow = getGameboard()[getTurn()];
+                let currentRowWord = currentRow.join('');
+                if(getWordsArray().includes(currentRowWord)){
+                    checkForMatch(getGameboard(), getTurn());
+                    if(currentRowWord == randomWord){
+                        shakeRow(getTurn());
+                        displayAnswer(randomWord);
+                        toggleNewGameButton();
+                        gameState = 'inactive';
+                        return;
+                    } else if(getTurn() === 5){
+                        displayAnswer(randomWord);
+                        toggleNewGameButton();
+                        gameState = 'inactive';
+                    } else {
+                        newTurn();
+                        return;
+                    };
+                } else {
+                    shakeRow(getTurn());
+                    return;
+                }
+            } else if(gameState === 'inactive') {
+                newGame();
+                return;
+            }
+        } else if(key.dataset.key === 'Backspace'){
+            if(gameState === 'inactive'){
+                return;
+            }
+            deleteLetter();
+            updateGameDisplay(getGameboard());
+            return;
+        } else if(/^[a-zA-Z]$/.test(key.dataset.key)){
+            if(gameState === 'inactive'){
+                return;
+            }
+            writeLetter(key.dataset.key);
+            updateGameDisplay(getGameboard());
+            return;
+        }    })
+})
+
 
 function newGame(){
     toggleNewGameButton();
