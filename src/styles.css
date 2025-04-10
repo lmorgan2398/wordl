@@ -131,3 +131,7 @@ h1 {
     border-radius: 4px;
     color: rgb(230, 230, 230)
 }
+
+.keyboard-container:hover {
+    cursor: pointer;
+}
