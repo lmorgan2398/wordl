@@ -67,4 +67,59 @@ const shakeRow = function(turn){
     }
 }
 
-export { updateGameDisplay, addAnswerClass, clearAnswerClasses, displayAnswer, clearAnswerDisplay, toggleNewGameButton, shakeRow }
+const keys = document.querySelectorAll('.keyboard-container button');
+const highlightKeyboard = function(){
+    gameDisplay.forEach((cell) => {
+        let cellKey = cell.textContent.toLowerCase();
+        let cellAnswer;
+        if(cell.classList.contains('right')){
+            cellAnswer = 'right';
+        } else if(cell.classList.contains('close')){
+            cellAnswer = 'close';
+        } else{
+            cellAnswer = 'wrong';
+        }
+        keys.forEach((key) => {
+            if(key.dataset.key === cellKey){
+                if(cellAnswer === 'right'){
+                    while(key.classList.contains('close')){
+                        key.classList.remove('close')
+                    };
+                    while(key.classList.contains('wrong')){
+                        key.classList.remove('wrong');
+                    };
+                    while(!key.classList.contains('right')){
+                    key.classList.add('right');
+                    };
+                } else if(cellAnswer === 'close'){
+                    while(key.classList.contains('wrong')){
+                        key.classList.remove('wrong');
+                    }
+                    while((!key.classList.contains('close')) && (!key.classList.contains('right'))){
+                        key.classList.add('close');
+                    }
+                } else if(cellAnswer === 'wrong'){
+                    while((!key.classList.contains('wrong')) && (!key.classList.contains('close')) && (!key.classList.contains('right'))){
+                        key.classList.add('wrong');
+                    }
+                }
+            };
+        })
+    })
+}
+
+const resetKeyboard = function(){
+    keys.forEach((key) => {
+        while(key.classList.contains('right')){
+            key.classList.remove('right');
+        };
+        while(key.classList.contains('close')){
+            key.classList.remove('close');
+        };
+        while(key.classList.contains('wrong')){
+            key.classList.remove('wrong');
+        };
+    })
+}
+
+export { updateGameDisplay, addAnswerClass, clearAnswerClasses, displayAnswer, clearAnswerDisplay, toggleNewGameButton, shakeRow, highlightKeyboard, resetKeyboard }

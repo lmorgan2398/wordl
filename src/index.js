@@ -1,7 +1,7 @@
 import './styles.css'
 import { getRandomWord, getWordsArray } from "./words";
 import { getGameboard, newGameboard, newTurn, resetTurn, writeLetter, deleteLetter, checkForCompleteWord, getTurn } from "./array";
-import { updateGameDisplay, addAnswerClass, clearAnswerClasses, displayAnswer, clearAnswerDisplay, toggleNewGameButton, shakeRow } from './display';
+import { updateGameDisplay, addAnswerClass, clearAnswerClasses, displayAnswer, clearAnswerDisplay, toggleNewGameButton, shakeRow, highlightKeyboard, resetKeyboard } from './display';
 
 let randomWord;
 let randomWordArray;
@@ -22,16 +22,19 @@ document.addEventListener('keydown', (e) => {
                 checkForMatch(getGameboard(), getTurn());
                 if(currentRowWord == randomWord){
                     shakeRow(getTurn());
+                    highlightKeyboard();
                     displayAnswer(randomWord);
                     toggleNewGameButton();
                     gameState = 'inactive';
                     return;
                 } else if(getTurn() === 5){
                     displayAnswer(randomWord);
+                    highlightKeyboard();
                     toggleNewGameButton();
                     gameState = 'inactive';
                 } else {
                     newTurn();
+                    highlightKeyboard();
                     return;
                 };
             } else {
@@ -100,16 +103,19 @@ keys.forEach(key => {
                     checkForMatch(getGameboard(), getTurn());
                     if(currentRowWord == randomWord){
                         shakeRow(getTurn());
+                        highlightKeyboard();
                         displayAnswer(randomWord);
                         toggleNewGameButton();
                         gameState = 'inactive';
                         return;
                     } else if(getTurn() === 5){
                         displayAnswer(randomWord);
+                        highlightKeyboard();
                         toggleNewGameButton();
                         gameState = 'inactive';
                     } else {
                         newTurn();
+                        highlightKeyboard();
                         return;
                     };
                 } else {
@@ -140,6 +146,7 @@ keys.forEach(key => {
 
 function newGame(){
     toggleNewGameButton();
+    resetKeyboard();
     resetTurn();
     clearAnswerDisplay();
     newGameboard();
